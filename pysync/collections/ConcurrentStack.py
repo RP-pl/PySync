@@ -1,7 +1,5 @@
 from collections.abc import Collection
 from threading import Lock
-
-#TDOO: Implement Set, Dict, and List
 class ConcurrentStack(Collection):
 
     def __init__(self, *args, **kwargs):

@@ -1,12 +1,14 @@
 from threading import Lock
 
+from pysync.locking.ReentrantLock import ReentrantLock
+
 
 class RWLock:
 
     def __init__(self):
         self._readCount = 0
-        self._writeLock = Lock()
-        self._readLock = Lock()
+        self._writeLock = ReentrantLock()
+        self._readLock = ReentrantLock()
 
     def acquire_read(self):
         self._readLock.acquire()
