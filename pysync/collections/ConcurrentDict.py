@@ -1,5 +1,3 @@
-#TODO: Implement a concurrent dictionary
-
 from pysync.locking.ReentrantLock import ReentrantLock
 
 
