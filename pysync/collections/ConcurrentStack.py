@@ -1,6 +1,10 @@
 from collections.abc import Collection
 from threading import Lock
 class ConcurrentStack(Collection):
+    """
+        A thread-safe stack.
+        This stack is not fair, meaning that there is no guarantee that the first thread that requests the lock will be the first thread to acquire it.
+    """
 
     def __init__(self, *args, **kwargs):
         self._stack = list(*args, **kwargs)
@@ -28,6 +32,11 @@ class ConcurrentStack(Collection):
             self._lock.release()
 
     def push(self, x):
+        """
+            Pushes an element onto the stack.
+        :param x: value to be pushed onto the stack
+        :return:
+        """
         self._lock.acquire()
         try:
             self._stack.append(x)
@@ -35,6 +44,10 @@ class ConcurrentStack(Collection):
             self._lock.release()
 
     def pop(self):
+        """
+            Pops an element off the stack.
+            :return: the element that was popped off the stack
+        """
         self._lock.acquire()
         try:
             element = self._stack[-1]
@@ -44,6 +57,10 @@ class ConcurrentStack(Collection):
             self._lock.release()
 
     def peek(self):
+        """
+            Returns the element at the top of the stack without removing it.
+            :return:  the element at the top of the stack
+        """
         self._lock.acquire()
         try:
             return self._stack[-1]
@@ -51,6 +68,10 @@ class ConcurrentStack(Collection):
             self._lock.release()
 
     def clear(self):
+        """
+        Removes all elements from the stack.
+        :return:
+        """
         self._lock.acquire()
         try:
             self._stack.clear()

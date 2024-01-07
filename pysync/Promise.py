@@ -14,7 +14,12 @@ def _run_executor_loop(value, pipleline):
 
 
 class Promise:
-
+    """
+        A promise is a wrapper around a value that allows for asynchronous execution of functions on that value.
+        The value is passed to the first function in the pipeline, and the result of that function is passed to the
+        second function in the pipeline, and so on. The result of the last function in the pipeline is the value of
+        the promise. The pipeline is executed asynchronously in a thread pool.
+    """
     def __init__(self, value=None, pipeline_size=1024):
         self._executor = ThreadPoolExecutor(max_workers=1)
         self._value = value

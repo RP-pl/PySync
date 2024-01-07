@@ -1,9 +1,13 @@
-from threading import Lock
-
 from pysync.locking.ReentrantLock import ReentrantLock
 
 
 class RWLock:
+    """
+        A read-write lock implementation.
+        This lock allows multiple readers to acquire the lock at the same time, but only one writer.
+        This lock is reentrant, meaning that a thread can acquire the lock multiple times.
+        This lock is not fair, meaning that there is no guarantee that the first thread that requests the lock will be the first thread to acquire it.
+    """
 
     def __init__(self):
         self._readCount = 0

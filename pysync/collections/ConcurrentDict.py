@@ -39,37 +39,43 @@ class ConcurrentDict:
         with self._lock:
             return repr(self._dict)
 
-    def get(self, ident, param):
+    def get(self, ident):
+        """
+        Returns the value of the given parameter for the given identifier.
+        :param ident: key to look up.
+        :return:
+        """
         with self._lock:
-            return self._dict.get(ident, {}).get(param, None)
+            return self._dict.get(ident, None)
 
-    def set(self, ident, param, value):
+    def set(self, ident, value):
+        """
+        Sets the value of the given parameter for the given identifier.
+        :param ident: key to set.
+        :param value: value to set.
+        :return:
+        """
         with self._lock:
             if ident not in self._dict:
                 self._dict[ident] = {}
-            self._dict[ident][param] = value
+            self._dict[ident] = value
 
-    def remove(self, ident, param):
+    def remove(self, ident):
+        """
+        Removes the given identifier from the dictionary.
+        :param ident: key to remove.
+        :return:
+        """
         with self._lock:
             if ident in self._dict:
-                if param in self._dict[ident]:
-                    del self._dict[ident][param]
-                    if len(self._dict[ident]) == 0:
-                        del self._dict[ident]
-
-    def remove_all(self, ident):
-        with self._lock:
-            if ident in self._dict:
-                del self._dict[ident]
-
-    def get_all(self, ident):
-        with self._lock:
-            return self._dict.get(ident, {})
+                    del self._dict[ident]
 
     def setdefault(self, ident, param):
+        """
+        Returns the value of the given parameter for the given identifier.
+        :param ident: key to look up.
+        :param param: parameter to look up.
+        :return:
+        """
         with self._lock:
-            if ident not in self._dict:
-                self._dict[ident] = {}
-            if param not in self._dict[ident]:
-                self._dict[ident][param] = None
-            return self._dict[ident][param]
+            self._dict.setdefault(ident, param)

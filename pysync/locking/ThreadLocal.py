@@ -4,6 +4,10 @@ from pysync.collections.ConcurrentDict import ConcurrentDict
 
 
 class ThreadLocal:
+    """
+         A thread local object that stores a dictionary of key-value pairs for each thread.
+         The key-value pairs can be accessed using the get and set methods.
+    """
 
     def __init__(self):
         self._local = ConcurrentDict()

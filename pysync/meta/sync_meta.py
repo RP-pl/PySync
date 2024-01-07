@@ -12,6 +12,10 @@ def _synchronize_set_attr(method):
 
 
 class Synchronized(type):
+    """
+        A metaclass that wraps all methods of a class with the synchronized decorator.
+        This metaclass also wraps the __setattr__ method of the class to synchronize attribute setting.
+    """
     def __new__(cls, name, bases, attrs):
         for attr_name, attr_value in attrs.items():
             if callable(attr_value):
