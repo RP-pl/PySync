@@ -83,3 +83,6 @@ class Promise:
             :return: A promise containing the result of the given function
         """
         return Promise.all(self, other).then(func)
+
+    def __del__(self):
+        self._executor.shutdown(False)
