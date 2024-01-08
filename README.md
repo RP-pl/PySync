@@ -11,6 +11,7 @@ It also adds another layer of abstraction by providing Promise API for asynchron
 * #### locking
   * **CountDownLatch** - a synchronization primitive that allows one or more threads to wait until a set of operations being performed in other threads completes.
   * **ReentrantLock** - a synchronization primitive that may be acquired multiple times by the same thread.
+  * **CycleBarrier** - a synchronization primitive that allows a set of threads to all wait for each other to reach a common barrier point.
   * **RWLock** - a synchronization primitive that solves the readers-writers problem.
   * **ThreadLocal** - a synchronization primitive that allows to store data local to a thread.
 * #### meta
@@ -23,4 +24,4 @@ It also adds another layer of abstraction by providing Promise API for asynchron
     * **ConcurrentList** - thread-safe list.
     * **ConcurrentStack** - thread-safe stack.
 
-* Promise - a synchronization primitive that represents a value that may be available in the future.
+* **Promise** - a synchronization primitive that represents a value that may be available in the future.

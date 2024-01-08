@@ -37,3 +37,49 @@ class Promise:
             self._pipeline.put(None)
             self._value = self._future.result()
         return self._value
+
+    def done(self):
+        """
+            Returns true if the promise has been fulfilled.
+        :return: Boolean
+        """
+        return self._done
+    @staticmethod
+    def all(*promises):
+        """
+            Returns a promise that is fulfilled when all of the given promises are fulfilled.
+        :param promises: promises to wait for
+        :return: Promise containing the values of the given promises
+        """
+        return Promise([p.get() for p in promises])
+
+    @staticmethod
+    def any(*promises):
+        """
+            Returns a promise that is fulfilled when any of the given promises are fulfilled.
+            :param promises: promises to wait for
+            :return: Promise containing the value of the first promise to be fulfilled
+        """
+        while True:
+            for p in promises:
+                if p.done():
+                    return Promise(p.get())
+
+
+    def run_after_either(self, other, func):
+        """
+            Returns a promise that is fulfilled when either of the given promises are fulfilled.
+        :param other: other promise
+        :param func: function to run on the value of the first promise to be fulfilled
+        :return: A promise containing the result of the given function
+        """
+        return Promise.any(self, other).then(func)
+
+    def run_after_all(self, other, func):
+        """
+            Returns a promise that is fulfilled when both of the given promises are fulfilled.
+            :param other: other promises
+            :param func: function to run on the values of the given promises
+            :return: A promise containing the result of the given function
+        """
+        return Promise.all(self, other).then(func)
