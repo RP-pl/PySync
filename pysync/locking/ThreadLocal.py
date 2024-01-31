@@ -1,6 +1,6 @@
 import threading
 
-from pysync.collections.ConcurrentDict import ConcurrentDict
+from ..collections.ConcurrentDict import ConcurrentDict
 
 
 class ThreadLocal:

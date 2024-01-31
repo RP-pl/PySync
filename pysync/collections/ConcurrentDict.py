@@ -1,11 +1,11 @@
-from pysync.locking.ReentrantLock import ReentrantLock
+import pysync
 
 
 class ConcurrentDict:
 
     def __init__(self):
         self._dict = {}
-        self._lock = ReentrantLock()
+        self._lock = pysync.locking.ReentrantLock()
 
     def __getitem__(self, key):
         with self._lock:
